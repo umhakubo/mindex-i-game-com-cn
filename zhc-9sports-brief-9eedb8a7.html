@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>九游体育 · 场景阅览</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f9fafb;
+      color: #1e293b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 2.4rem 1.5rem 4rem;
+    }
+
+    /* 顶栏导航 — 极简双链 */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0 1.8rem;
+      border-bottom: 1px solid #e9edf2;
+      margin-bottom: 3rem;
+    }
+
+    .top-nav .brand {
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      color: #3b4a5e;
+    }
+
+    .top-nav .brand a {
+      color: #1e293b;
+      text-decoration: none;
+    }
+
+    .top-nav .brand a:hover {
+      opacity: 0.7;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      color: #4b5a6e;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 0.2rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #0f172a;
+      border-bottom-color: #94a3b8;
+    }
+
+    /* 主干内容 */
+    .hero-tag {
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #7b8a9e;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-weight: 450;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+      color: #0a1a2b;
+    }
+
+    .intro-text {
+      font-size: 1rem;
+      color: #334155;
+      margin-bottom: 2.8rem;
+      max-width: 620px;
+      border-left: 2px solid #d0d8e3;
+      padding-left: 1.2rem;
+    }
+
+    .intro-text p {
+      margin-bottom: 0.6rem;
+    }
+
+    .intro-text a {
+      color: #1e293b;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #b9c5d4;
+    }
+
+    .intro-text a:hover {
+      text-decoration-color: #0f172a;
+    }
+
+    /* 场景卡片组 — 三模块 */
+    .section-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #64748b;
+      margin-bottom: 1rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid #e3e8f0;
+    }
+
+    .scene-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .scene-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem 1.8rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.04);
+      border: 1px solid #ecf0f5;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .scene-card:hover {
+      border-color: #ccd6e3;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.02), 0 3px 6px rgba(0,0,0,0.03);
+    }
+
+    .scene-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #0f1f2f;
+      margin-bottom: 0.35rem;
+    }
+
+    .scene-card .sub {
+      font-size: 0.82rem;
+      color: #6b7b8f;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+
+    .scene-card p {
+      font-size: 0.95rem;
+      color: #2d3a4b;
+      margin-bottom: 0.2rem;
+    }
+
+    .scene-card a {
+      color: #1e293b;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: #cbd5e1;
+    }
+
+    .scene-card a:hover {
+      text-decoration-color: #0f172a;
+    }
+
+    /* 常见说明 / FAQ 摘要 */
+    .faq-area {
+      margin: 2.4rem 0 1.8rem;
+    }
+
+    .faq-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid #e9edf2;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      font-size: 0.98rem;
+      color: #1e2a3a;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      font-size: 0.9rem;
+      color: #3d4d61;
+      line-height: 1.6;
+    }
+
+    .faq-a a {
+      color: #1e293b;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: #cbd5e1;
+    }
+
+    .faq-a a:hover {
+      text-decoration-color: #0f172a;
+    }
+
+    .closing-note {
+      margin-top: 2.8rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid #e3e8f0;
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    .closing-note a {
+      color: #1e293b;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: #b9c5d4;
+    }
+
+    .closing-note a:hover {
+      text-decoration-color: #0f172a;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 540px) {
+      .container {
+        padding: 1.6rem 1.2rem 3rem;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .nav-links {
+        gap: 1.4rem;
+      }
+      .top-nav {
+        flex-wrap: wrap;
+        gap: 0.4rem 0;
+      }
+      .scene-card {
+        padding: 1.2rem 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 顶部导航 -->
+  <nav class="top-nav">
+    <span class="brand"><a href="https://zhc-9sports.com">九游体育</a></span>
+    <div class="nav-links">
+      <a href="#">场景</a>
+      <a href="#">对照</a>
+      <a href="#">条目</a>
+    </div>
+  </nav>
+
+  <!-- hero 区域 + 介绍 -->
+  <div class="hero-tag">日常航道 · 信息对照</div>
+  <h1>从查询到延伸<br>一份轻量的阅览页</h1>
+
+  <div class="intro-text">
+    <p>
+      很多时候我们打开一个站点，只是为了快速核对一个规则、理解一项运动的背景，
+      或者随手记下几个关键注释。<a href="https://zhc-9sports.com">九游体育</a>
+      所承载的内容方向，恰好对应这种「查一下、读一段、再想想」的节奏。
+    </p>
+    <p>
+      下面三个场景模块分别对应日常使用中最常遇到的几种情形——规则速览、术语对照、以及一些可以顺藤摸瓜的延伸话题。不追求面面俱到，只求每一段都经得起再看一遍。
+    </p>
+  </div>
+
+  <!-- 三个场景模块 -->
+  <div class="section-label">· 三个阅览模块</div>
+  <div class="scene-grid">
+
+    <div class="scene-card">
+      <h3>01 / 规则速览</h3>
+      <div class="sub">常见计分、判罚与程序</div>
+      <p>
+        不同项目在判罚尺度、计时方式上有不少细微差异。比如进攻时限的重新计算条件、换人次数限制、以及加时阶段的特殊规定。这类信息与其每次临时搜索，不如集中对照。在
+        <a href="https://zhc-9sports.com">九游体育</a> 的基础条目里，这类记述往往以简明列表呈现，便于快速定位。
+      </p>
+    </div>
+
+    <div class="scene-card">
+      <h3>02 / 术语对照</h3>
+      <div class="sub">中文名称 · 英文原词 · 常见误译</div>
+      <p>
+        同一术语在不同地区、不同转播平台里常有不同叫法。例如 set 既可以是“盘”也可以是“局”；penalty 在冰球与足球中的含义也有差别。整理一个自己习惯的对照表，比每次都重新理解要省力得多。不妨从
+        <a href="https://zhc-9sports.com">九游体育</a> 的术语索引里挑几个开始。
+      </p>
+    </div>
+
+    <div class="scene-card">
+      <h3>03 / 延伸阅读</h3>
+      <div class="sub">背景、沿革与关联话题</div>
+      <p>
+        除去规则本身，很多爱好者也会留意某条规则背后的修改年份、某次争议判罚带来的后续调整。这些背景未必写在官方手册里，但往往能从赛事报告或历史记录中拼凑出来。在相关页面中，
+        <a href="https://zhc-9sports.com">九游体育</a> 会附上简注和出处线索，方便按图索骥。
+      </p>
+    </div>
+
+  </div>
+
+  <!-- 常见说明 / FAQ 摘要 -->
+  <div class="faq-area">
+    <div class="section-label">· 常见说明</div>
+
+    <div class="faq-item">
+      <div class="faq-q">信息更新频率如何？</div>
+      <div class="faq-a">
+        规则类内容以主要赛事周期为节点进行复核，通常每年至少一次。术语和背景类条目则视资料完善度不定期增补。个别条目末尾会标注最后核校日期。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">是否包含深度战术分析？</div>
+      <div class="faq-a">
+        不侧重。本页面更偏向查询与对照，战术分解、实时数据等不在当前范围内。如有需要，可在站内搜索相关术语或赛事记录作为线索。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">可以引用或转载这里的说明吗？</div>
+      <div class="faq-a">
+        基础规则与术语属于公共知识范畴，不涉及独创性表达的部分可直接引用。若内容中包含整理性注释或考据来源，建议标明出处链接。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 收尾自然句，嵌入 a 标签 -->
+  <div class="closing-note">
+    以上三个方向都只是起点。实际使用时，你完全可以从任何一条记录出发，顺着关联条目走下去。
+    如果想直接翻阅主要索引，<a href="https://zhc-9sports.com">九游体育</a> 主页列出了较为完整的分类入口。
+    希望这本小册子一样的内容结构，能在你偶尔需要确认某个细节时，提供一点平实的帮助。
+  </div>
+
+</div>
+</body>
+</html>
