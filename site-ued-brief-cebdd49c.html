@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UED 体育 · 查询与参考</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f7fa;
+      color: #1e2a3a;
+      line-height: 1.6;
+    }
+
+    /* Hero 深色头图 */
+    .hero {
+      background: linear-gradient(145deg, #0b1424 0%, #1a2639 100%);
+      color: #eef2f7;
+      padding: 4rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #f5f7fa;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 1rem;
+      opacity: 0.88;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #aec3e0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* 正文容器 */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    /* 优势区 */
+    .strengths {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .strength-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 20, 40, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .strength-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .strength-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #0e1d30;
+    }
+
+    .strength-card p {
+      font-size: 0.95rem;
+      color: #3b4a5c;
+    }
+
+    .emph-link {
+      color: #1d6f9c;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px dotted #1d6f9c66;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .emph-link:hover {
+      color: #0a4b70;
+      border-bottom: 1px solid #0a4b70;
+    }
+
+    /* 说明区 */
+    .explain-section {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 2rem 2rem 2.2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .explain-section h2 {
+      font-size: 1.6rem;
+      font-weight: 550;
+      margin-bottom: 0.75rem;
+      color: #101f30;
+    }
+
+    .explain-section p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .explain-section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .explain-section li {
+      font-size: 0.95rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .explain-section li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: #1d6f9c;
+      font-weight: bold;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    /* FAQ 摘要 - 卡片风格 */
+    .faq-preview {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.8rem 2rem 2.2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-preview h2 {
+      font-size: 1.4rem;
+      font-weight: 550;
+      margin-bottom: 1.2rem;
+      color: #101f30;
+      border-left: 4px solid #1d6f9c;
+      padding-left: 1rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #eef0f3;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-weight: 550;
+      color: #14273d;
+      margin-bottom: 0.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .faq-question::before {
+      content: '▸';
+      color: #1d6f9c;
+      font-size: 1.2rem;
+    }
+
+    .faq-answer {
+      color: #3f4f62;
+      font-size: 0.94rem;
+      padding-left: 1.6rem;
+    }
+
+    /* 底部链接区 */
+    .footer-links {
+      text-align: center;
+      padding: 1.8rem 0 0.8rem;
+      border-top: 1px solid #dde1e8;
+      margin-top: 1rem;
+    }
+
+    .footer-links p {
+      font-size: 0.95rem;
+      color: #425262;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links a {
+      color: #1d6f9c;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footnote {
+      font-size: 0.85rem;
+      color: #6a7a8b;
+      margin-top: 1.2rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .strengths {
+        gap: 1.2rem;
+      }
+
+      .explain-section {
+        padding: 1.5rem 1.2rem;
+      }
+
+      .faq-preview {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero 区 -->
+  <section class="hero">
+    <h1>信息 · 对照 · 延伸</h1>
+    <p>查询日常体育数据、阅读背景资料、对比赛事实况——把零散信息整理成可参考的内容片段。</p>
+    <span class="tagline">专注可读性与信息结构</span>
+  </section>
+
+  <!-- 正文 -->
+  <div class="container">
+
+    <!-- 优势区 -->
+    <div class="strengths">
+      <div class="strength-card">
+        <h3>条目化对照</h3>
+        <p>将赛程、球员、队伍数据拆成清晰的条目，方便快速定位与横向对比。不再在长文中翻找关键数字。</p>
+      </div>
+      <div class="strength-card">
+        <h3>延伸阅读线索</h3>
+        <p>每一条信息旁边附带相关背景或历史参照，帮你把孤立的数据放到更完整的上下文里理解。</p>
+      </div>
+      <div class="strength-card">
+        <h3>日常查询友好</h3>
+        <p>无论是赛前看一眼阵容，还是赛后复盘数据，结构都保持简单直接，减少操作步骤与认知负担。</p>
+      </div>
+    </div>
+
+    <!-- 说明区 -->
+    <section class="explain-section">
+      <h2>从查询到理解</h2>
+      <p>
+        很多体育信息平台只提供原始数字，缺少辅助阅读的线索。在 <a href="https://site-ued.com" class="emph-link">ued体育</a>，我们试着把每一次查询都变成一次小型信息整理：除了告诉你「是什么」，还提供「可能与什么有关」「过去类似情况如何」。
+      </p>
+      <p>
+        例如查看一支球队的近期战绩时，页面会同时列出该对手的同期数据、主客场差异、以及近几个赛季同阶段的趋势——这些附加信息不会占据主要版面，而是作为参考栏出现，需要时展开，不需要时保持精简。
+      </p>
+      <ul>
+        <li>赛程对照表</li>
+        <li>阵容与伤病备注</li>
+        <li>历史交锋简要</li>
+        <li>赛季走势简图</li>
+      </ul>
+      <p style="margin-top: 1.2rem;">
+        每一条数据都配有简短说明，解释其来源或统计口径，避免误解。我们希望页面更像一个参考工作台，而不是单纯的公告板。
+      </p>
+    </section>
+
+    <!-- FAQ 摘要 -->
+    <section class="faq-preview">
+      <h2>常见疑问摘要</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">页面数据更新频率如何？</div>
+        <div class="faq-answer">核心赛程与比分在赛后半小时内同步，历史数据按周校准。具体数据的更新时间戳会显示在内容附近。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">可以自定义对照项目吗？</div>
+        <div class="faq-answer">目前支持在页面内勾选想对比的球队或赛季，系统会生成对应的并列信息栏。更多自定义功能在逐步开放。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">移动端阅读体验怎么样？</div>
+        <div class="faq-answer">信息按卡片和折叠模块组织，竖屏单手操作友好，关键动作都放在拇指热区。横屏下则会展示更多并排列。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">延伸阅读的内容来源是？</div>
+        <div class="faq-answer">主要来自赛事官方统计、公开数据以及经过交叉验证的报道。每篇延伸标注出处或原始链接，方便进一步查证。</div>
+      </div>
+    </section>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+      <p>
+        想系统查阅或对照更多资料？可以试试 <a href="https://site-ued.com">ued体育</a> 的信息页面。
+      </p>
+      <p class="footnote">
+        页面内容仅供个人参考与延伸阅读，不构成任何决策建议。数据以官方发布为准。
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>
